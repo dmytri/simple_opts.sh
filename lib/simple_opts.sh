@@ -20,7 +20,8 @@ __opt_parse() {
     opt=${opt%:*}
     # puts _name: $_name, _flag: $_flag, _negated: $_negated, opt: $opt, _args: \"$_args\"
 
-    count=$(grep -o $(echo $opt | sed 's/-/\\-/g') <<< $_args | wc -l)
+    count=$(grep -o ${opt/-/\\-} <<< $_args | wc -l)
+
     if (( count > 1 )); then
       local _type_$_name=array
     fi
